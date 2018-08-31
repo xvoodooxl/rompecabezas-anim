@@ -4,3 +4,210 @@
 @import '3-layout/3-layout';
 @import '4-modules/4-modules';
 @import '5-templates/5-templates';
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway:400,600');
+
+// Colors
+$mainColor: #fff;
+$secondaryColor: #df4b4b;
+$orange: #FF9F1C;
+$lightOrange: #FFBF69;
+
+// Fonts
+$mainFont: 'Montserrat', sans-serif;
+$secondaryFont : 'Raleway', sans-serif;
+
+@mixin easeOut {
+  transition: all 0.3s ease-out;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: $mainColor;
+  background-image: url('../images/adventure.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  overflow-x: hidden;
+
+}
+
+// Estilos de la intro
+.box {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0;
+  display: inline-block;
+  background-color: $secondaryColor;
+}
+
+// Estilos del contenedor del juego
+#juego-contenedor {
+  font-family: $mainFont;
+  width: auto;
+  height: 599px;
+  display: none;
+  opacity: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: $secondaryColor;
+  border-radius: 50px;
+
+  // Estilos de las intrucciones
+  #seleccionar {
+    width: 300px;
+    height: 600px;
+    background-color: $mainColor;
+    border-radius: 16px 0 0 16px;
+    margin-left: -2px;
+
+    .title-1 {
+      text-align: center;
+      width: 80%;
+      color: $mainColor;
+      background-color: $secondaryColor;
+      border-radius: 10px;
+      margin: 0 auto;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      font-size: 30px;
+    }
+  }
+
+  // Estilos del tablero de juego
+  #juego {
+    width: 600px;
+    height: 600px;
+
+  #pieza9 {
+    border-right: 0.5px solid black;
+  }
+
+    div {
+      text-align: center;
+      animation: fadein 2s;
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+
+  }
+
+  // Estilos del contendor de las instrucciones
+  #instrucciones-container {
+    width: 300px;
+    height: 600px;
+    background-color: $mainColor;
+    border-radius: 0 16px 16px 0;
+    margin-left: -1px;
+    padding: 10px;
+
+    #flecha {
+      font-size: 40px;
+      text-align: center;
+    }
+
+    #instrucciones {
+      ul {
+        text-align: center;
+        padding-left: 5px;
+        list-style: none;
+      }
+
+      li {
+        padding: 5px 0;
+        animation: fadein 5s;
+      }
+
+      li::before {
+        content: "• ";
+        color: #EC6778;
+      }
+    }
+
+    #cantidad-movimientos {
+      text-align: center;
+      font-size: 40px;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      h3 {
+        width: 40%;
+        height: 40%;
+        margin: 0 auto;
+        color: $mainColor;
+        background-color: #202020;
+        border-radius: 10px;
+      }
+
+      h4 {
+        margin-top: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  // Estilos de las piezas del juego
+  .pieza-juego {
+    float: left;
+    width: 33.3%;
+    height: 33.3%;
+    border: 0.5px solid black;
+  }
+}
+
+
+.title-1 {
+  text-align: center;
+  width: 80%;
+  color: $mainColor;
+  background-color: $secondaryColor;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 30px;
+}
+
+.title-2 {
+  text-align: center;
+  width: 60%;
+  color: $mainColor;
+  background-color: $secondaryColor;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+// .button {
+//   width: 250px;
+//   height: 60px;
+//   background-color: $secondaryColor;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 10px;
+//   color: $mainColor;
+//
+//   &:hover {
+//     background-color: $orange;
+//   }
+// }
