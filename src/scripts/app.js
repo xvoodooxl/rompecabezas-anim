@@ -4,6 +4,7 @@ window.onload = function() {
     hideAndShow();
     animateContenedor();
   }, 3000);
+  iniciar();
 }
 
 
@@ -74,19 +75,21 @@ function hideAndShow() {
   secondIntro.style.display = 'flex';
 };
 
-
-
 // Seccion del juego
 
 
 // Arreglo que contiene las intrucciones del juego
 var instrucciones = [
-  "Primera instruccion",
-  "Segunda istruccion",
-  "Tercera instruccion",
-  "Cuarta instruccion"];
+  "Selecciona el rompecabezas",
+  "Usa las flechas para mover las piezas",
+  "Usa menos de 100 movimientos",
+  "Completa la imagen para ganar"];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
+
+
+// Variable para iniciar el contador para el limite de movimientos
+var limiteMovimientos = 100;
 
 // Representación de la grilla. Cada número representa a una pieza.
 // El 9 es la posición vacía
@@ -105,18 +108,53 @@ var columnaVacia = 2;
 Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-instrucciones'.
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
+
+// Mostrar instrucciones de a una en un intervalo de 5 segundos
 function mostrarInstrucciones(instrucciones) {
-  for (pos in instrucciones) {
-    mostrarInstruccionEnLista(instrucciones[pos], 'lista-instrucciones');
-  }
-}
+  let counter = 0;
+    setInterval(() => {
+          mostrarInstruccionEnLista(instrucciones[counter], 'lista-instrucciones');
+          let ul = document.getElementById('lista-instrucciones');
+          ul.removeChild(ul.firstChild);
+          counter += 1;
+          if (counter == instrucciones.length) {
+            counter = 0;
+          };
+    }, 5000);
+};
 
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
 function agregarUltimoMovimiento(direccion) {
   movimientos.push(direccion);
   actualizarUltimoMovimiento(direccion);
+  actualizarCantidadMovimientos();
 }
+
+
+// Funcion que actualiza la variable con el numero de movimiento restantess
+function actualizarCantidadMovimientos() {
+    limiteMovimientos -= 1;
+    if (limiteMovimientos == 0) {
+      return limiteMovimientos;
+    };
+}
+
+
+// Funcion que muestra el numero de movimientos en pantalla tanto los ya hechos como los restantes
+function mostrarMovimientosEnPantalla() {
+  let cartel = document.getElementById('movimientos');
+  let limite = document.getElementById('movimientos-restantes');
+  cartel.innerText = movimientos.length;
+  limite.innerText = `Movimientos restantes: ${limiteMovimientos}`;
+};
+
+
+// Actualiza el movimiento inicial a cero
+function mostrarMovimientoInicial() {
+  let cartel = document.getElementById('movimientos');
+  cartel.innerText = movimientos.length;
+};
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora.
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
@@ -138,8 +176,17 @@ function chequearSiGano() {
 }
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
+
+// Muestra el cartel ganador y reinicia el juego
 function mostrarCartelGanador() {
     alert('Ganaste el juego!');
+    window.location.href = "index.html";
+}
+
+// Muestra el cartel perdedor y reinicia el juego
+function mostrarCartelPerdio() {
+    alert('Perdiste! Solo tenes 100 movimientos');
+    window.location.href = "index.html";
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -318,6 +365,7 @@ function mezclarPiezas(veces) {
     }, 100);
 
     movimientos = []; // resetear array de Movimientos para que queden solo los hechos por el usuario
+    limiteMovimientos = 100;
 }
 
 /* capturarTeclas: Esta función captura las teclas presionadas por el usuario. Javascript
@@ -342,6 +390,10 @@ function capturarTeclas() {
             }
             evento.preventDefault();
         }
+        if (limiteMovimientos == 0) {
+          mostrarCartelPerdio();
+        }
+        mostrarMovimientosEnPantalla();
     })
 }
 
@@ -352,7 +404,7 @@ function iniciar() {
     mostrarInstrucciones(instrucciones);
     mezclarPiezas(30);
     capturarTeclas();
+    mostrarMovimientoInicial();
 }
 
 // Ejecutamos la función iniciar
-iniciar();
