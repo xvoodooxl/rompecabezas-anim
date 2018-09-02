@@ -1,8 +1,8 @@
 window.onload = function() {
   animateIntro();
   setTimeout(function() {
-    hideAndShow();
-    animateContenedor();
+    hideAndShow('#juego-contenedor', '#intro-logo');
+    animateContenedor('#juego-contenedor');
   }, 3000);
   iniciar();
 }
@@ -57,9 +57,9 @@ function animateIntro() {
   };
 };
 
-function animateContenedor(){
+function animateContenedor(target){
   anime({
-    targets: '#juego-contenedor',
+    targets: target,
     opacity: 1,
     easing: 'easeInOutQuad',
     delay: 80,
@@ -67,23 +67,30 @@ function animateContenedor(){
   });
 };
 
-
-function hideAndShow() {
-  var secondIntro = document.querySelector('#juego-contenedor');
-  var intro = document.querySelector('#intro-logo');
-  intro.style.display = 'none';
-  secondIntro.style.display = 'flex';
+function hideAndShow(item1, item2) {
+  let show = document.querySelector(item1);
+  var hide = document.querySelector(item2);
+  hide.style.display = 'none';
+  show.style.display = 'flex';
 };
+
 
 // Seccion del juego
 
+// Declaracion de las variables para cambiar las images
+const rompecabezas1 = [10,11,12,13,14,15,16,17];
+const rompecabezas2 = [20,21,22,23,24,25,26,27];
+const rompecabezas3 = [30,31,32,33,34,35,36,37];
 
 // Arreglo que contiene las intrucciones del juego
-var instrucciones = [
-  "Selecciona el rompecabezas",
+const instrucciones = [
+  "Selecciona el rompecabezas para empezar",
   "Usa las flechas para mover las piezas",
-  "Usa menos de 100 movimientos",
+  "Usa menos de 100 movimientos para ganar",
+  "Cuando selecciones un rompecabezas el juego se reiniciara",
   "Completa la imagen para ganar"];
+
+
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -135,9 +142,6 @@ function agregarUltimoMovimiento(direccion) {
 // Funcion que actualiza la variable con el numero de movimiento restantess
 function actualizarCantidadMovimientos() {
     limiteMovimientos -= 1;
-    if (limiteMovimientos == 0) {
-      return limiteMovimientos;
-    };
 }
 
 
@@ -154,6 +158,28 @@ function mostrarMovimientosEnPantalla() {
 function mostrarMovimientoInicial() {
   let cartel = document.getElementById('movimientos');
   cartel.innerText = movimientos.length;
+};
+
+
+// Funcion para seleccionar el rompecabezas
+function seleccionarJuego(rompecabezas){
+  var tablero = [];
+
+  for(let i = 1; i < 9; i++) {
+	   tablero.push(document.getElementById('pieza'+i));
+  };
+
+  var tagStart = "<img class='pieza-juego' src=";
+  var tagEnd = " alt='pieza1'>";
+
+  for (pos in rompecabezas) {
+    tablero[pos].innerHTML = tagStart + `'../images/${rompecabezas[pos]}.jpg'` + tagEnd;
+  }
+
+  mezclarPiezas(30);
+  mostrarMovimientoInicial();
+  mostrarMovimientosEnPantalla();
+  capturarTeclas();
 };
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora.
@@ -179,14 +205,18 @@ function chequearSiGano() {
 
 // Muestra el cartel ganador y reinicia el juego
 function mostrarCartelGanador() {
-    alert('Ganaste el juego!');
-    window.location.href = "index.html";
+    hideAndShow('#cartel-ganador','#juego-contenedor');
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 4000);
 }
 
 // Muestra el cartel perdedor y reinicia el juego
 function mostrarCartelPerdio() {
-    alert('Perdiste! Solo tenes 100 movimientos');
-    window.location.href = "index.html";
+    hideAndShow('#cartel-ganador','#juego-contenedor');
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 4000);
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -402,9 +432,5 @@ y ejecutando la función para que se capturen las teclas que
 presiona el usuario */
 function iniciar() {
     mostrarInstrucciones(instrucciones);
-    mezclarPiezas(30);
-    capturarTeclas();
     mostrarMovimientoInicial();
 }
-
-// Ejecutamos la función iniciar

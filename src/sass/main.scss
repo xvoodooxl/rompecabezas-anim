@@ -49,6 +49,7 @@ body {
   margin: 0;
   display: inline-block;
   background-color: $secondaryColor;
+  overflow: hidden;
 }
 
 // Estilos del contenedor del juego
@@ -221,6 +222,10 @@ body {
   }
 }
 
+
+#cartel-ganador {
+  display: none;
+}
 // .button {
 //   width: 250px;
 //   height: 60px;
