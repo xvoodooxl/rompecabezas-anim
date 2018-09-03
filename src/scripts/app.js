@@ -8,9 +8,12 @@ window.onload = function() {
 }
 
 
-// SECCION DE FUNCIONES DE ANIMACION
+//==========================================================
+//-------------SECCION DE FUNCIONES DE ANIMACION------------
+//==========================================================
 
 
+// Animacion para la intro (Uso anime.js)
 function animateIntro() {
   // Declarando las constantes para seleccion en el dom los elementos (La forma especifica de declarar es por la libreria, se declara con selectores de CSS)
 
@@ -57,6 +60,8 @@ function animateIntro() {
   };
 };
 
+
+// Funcion para animar contenedores
 function animateContenedor(target){
   anime({
     targets: target,
@@ -67,6 +72,7 @@ function animateContenedor(target){
   });
 };
 
+// Funcion para esconder una seccion y mostrar otra
 function hideAndShow(item1, item2) {
   let show = document.querySelector(item1);
   var hide = document.querySelector(item2);
@@ -75,14 +81,22 @@ function hideAndShow(item1, item2) {
 };
 
 
-// Seccion del juego
+//==========================================================
+//-------------SECCION DE FUNCIONES DEL JUEGO---------------
+//==========================================================
 
-// Declaracion de las variables para cambiar las images
+
+//==========================================================
+//-------------DECLARACION DE VARIABLES GLOBALES------------
+//==========================================================
+
+
+// Declaracion de las variables para cambiar las imagenes
 const rompecabezas1 = [10,11,12,13,14,15,16,17];
 const rompecabezas2 = [20,21,22,23,24,25,26,27];
 const rompecabezas3 = [30,31,32,33,34,35,36,37];
 
-// Arreglo que contiene las intrucciones del juego
+// Array que contiene las intrucciones del juego
 const instrucciones = [
   "Selecciona el rompecabezas para empezar",
   "Usa las flechas para mover las piezas",
@@ -110,6 +124,11 @@ var limiteMovimientos = 100;
 Esta posición comienza siendo la [2, 2]*/
 var filaVacia = 2;
 var columnaVacia = 2;
+
+
+//==========================================================
+//-------------FUNCIONES PARA EL JUEGO----------------------
+//==========================================================
 
 /* Esta función deberá recorrer el arreglo de instrucciones pasado por parámetro.
 Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-instrucciones'.
@@ -206,6 +225,7 @@ function chequearSiGano() {
 // Muestra el cartel ganador y reinicia el juego
 function mostrarCartelGanador() {
     hideAndShow('#cartel-ganador','#juego-contenedor');
+    animateContenedor('#cartel-ganador');
     setTimeout(() => {
       window.location.href = "index.html";
     }, 4000);
@@ -213,7 +233,8 @@ function mostrarCartelGanador() {
 
 // Muestra el cartel perdedor y reinicia el juego
 function mostrarCartelPerdio() {
-    hideAndShow('#cartel-ganador','#juego-contenedor');
+    hideAndShow('#cartel-perdedor','#juego-contenedor');
+    animateContenedor('#cartel-perdedor');
     setTimeout(() => {
       window.location.href = "index.html";
     }, 4000);
@@ -395,7 +416,7 @@ function mezclarPiezas(veces) {
     }, 100);
 
     movimientos = []; // resetear array de Movimientos para que queden solo los hechos por el usuario
-    limiteMovimientos = 100;
+    limiteMovimientos = 100; // Resetear el limite de movimientos cuando termina de mezclar las piezas
 }
 
 /* capturarTeclas: Esta función captura las teclas presionadas por el usuario. Javascript

@@ -224,7 +224,54 @@ body {
 
 
 #cartel-ganador {
+  font-family: $mainFont;
+  width: 900px;
+  height: 599px;
   display: none;
+  opacity: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: $mainColor;
+  border-radius: 50px;
+  div {
+    background-color: $secondaryColor;
+    width: 80%;
+    height: 80%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    text-align: center;
+    color: $mainColor;
+  }
+}
+
+#cartel-perdedor {
+  font-family: $mainFont;
+  width: 900px;
+  height: 599px;
+  display: none;
+  opacity: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: $mainColor;
+  border-radius: 50px;
+  div {
+    background-color: $secondaryColor;
+    width: 80%;
+    height: 80%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: $mainColor;
+  }
+  h1 {
+    text-align: center;
+  }
 }
 // .button {
 //   width: 250px;

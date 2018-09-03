@@ -27,13 +27,12 @@
     </div>
   </div>
 
-
   <div id="juego-contenedor">
 
     <div id="seleccionar">
       <h1 class="title-1">Selecciona el <br> Rompecabezas</h1>
       <div class="images-container">
-        <a href="#"><img src="../images/select-1.png" onclick="seleccionarJuego(rompecabezas1)" alt="select-1" class="select-img"></a>
+        <img src="../images/select-1.png" onclick="seleccionarJuego(rompecabezas1)" alt="select-1" class="select-img">
         <img src="../images/select-2.jpg" onclick="seleccionarJuego(rompecabezas2)" alt="select-2" class="select-img">
         <img src="../images/select-3.jpg" onclick="seleccionarJuego(rompecabezas3)" alt="select-3" class="select-img">
       </div>
@@ -70,8 +69,18 @@
     </div>
   </div>
 
-  <div id="cartel-ganador">
-    <h1>Ganaste!</h1>
+  <div id="cartel-ganador" class="cartel">
+    <div>
+      <h1>Ganaste!</h1>
+    </div>
+  </div>
+
+  <div id="cartel-perdedor" class="cartel">
+    <div>
+      <h1>Perdiste :(</h1>
+      <p>Solo tenes 100 movimientos</p>
+      <p>Mejor suerte la proxima!</p>
+    </div>
   </div>
 
   <script src="scripts/anime.min.js"></script>
